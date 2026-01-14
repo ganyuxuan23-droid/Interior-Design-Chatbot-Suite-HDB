@@ -45,6 +45,32 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
+    /* Video wrapper + unmute button */
+    .video-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .unmute-btn {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      backdrop-filter: blur(4px);
+    }
+
+    .unmute-btn:focus {
+      outline: 2px solid #fff;
+    }
+
     /* ===== Chatbot ===== */
     #flowise-chatbot {
       position: fixed;
@@ -131,10 +157,13 @@
     <!-- Video Section -->
     <div class="section">
       <h2>Watch Our AI Assistant in Action</h2>
-      <video class="video" controls autoplay loop playsinline preload="metadata" poster="assets/Poster%20-%20Plan%20Your%20Dream%20HDB%20Flat!.png">
-        <source src="assets/HDB%20Renovation%20Assistant.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <div class="video-wrapper">
+        <video id="promo-video" class="video" controls autoplay muted loop playsinline preload="metadata" poster="assets/Poster%20-%20Plan%20Your%20Dream%20HDB%20Flat!.png">
+          <source src="assets/HDB%20Renovation%20Assistant.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <button id="unmute-btn" class="unmute-btn" aria-pressed="false">Unmute</button>
+      </div>
     </div>
   </div>
 
@@ -165,6 +194,44 @@
 
     // Close chatbot
     closeBtn.addEventListener("click", () => { chatDiv.classList.remove("active"); });
+  </script>
+
+  <script>
+    // Video mute/unmute helper
+    (function(){
+      const video = document.getElementById('promo-video');
+      const btn = document.getElementById('unmute-btn');
+
+      if(!video || !btn) return;
+
+      function updateButton() {
+        if (video.muted) {
+          btn.textContent = 'Unmute';
+          btn.setAttribute('aria-pressed','false');
+        } else {
+          btn.textContent = 'Mute';
+          btn.setAttribute('aria-pressed','true');
+        }
+      }
+
+      // Try to keep autoplay playing muted; show button so user can enable sound.
+      updateButton();
+
+      btn.addEventListener('click', async () => {
+        try {
+          video.muted = !video.muted;
+          updateButton();
+          // Attempt to resume playback with sound on user gesture
+          await video.play();
+        } catch (err) {
+          // If play() fails, leave muted state and focus video for user.
+          console.warn('Playback failed:', err);
+        }
+      });
+
+      // Optional: if user interacts elsewhere, ensure button text reflects state
+      document.addEventListener('visibilitychange', updateButton);
+    })();
   </script>
 
 </body>
