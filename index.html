@@ -259,39 +259,74 @@
     </div>
   </div>
 
-  <!-- Chatbot Toggle Button (compact Flowise button) -->
+  <!-- Chatbot Toggle Button (compact) -->
   <button id="open-chat" aria-label="Open chat" title="Chat with us">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="white"/>
     </svg>
   </button>
+  <label for="chat-provider" style="position:fixed;bottom:28px;right:92px;color:#222;font-size:13px;z-index:10000">Bot:</label>
+  <select id="chat-provider" aria-label="Chat provider" title="Choose chat provider" style="position:fixed;bottom:20px;right:70px;z-index:10000;padding:6px;border-radius:6px;border:1px solid #ccc;background:#fff;color:#111;font-size:13px;">
+    <option value="botpress">Botpress</option>
+    <option value="flowise">Flowise</option>
+  </select>
 
   <!-- Chatbot Container -->
   <div id="flowise-chatbot">
     <span id="close-chat">&times;</span>
   </div>
 
-  <!-- Botpress Chatbot Embed (uses provided shareable URL) -->
+  <!-- Chat provider loader: Botpress iframe or Flowise embed (lazy) -->
   <script>
     const BOTPRESS_URL = "https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/14/03/20260114035928-MOB2EQWY.json";
     const chatDiv = document.getElementById("flowise-chatbot");
     const openBtn = document.getElementById("open-chat");
     const closeBtn = document.getElementById("close-chat");
+    const providerSel = document.getElementById('chat-provider');
 
-    function ensureIframe() {
-      if (!chatDiv.querySelector('iframe')) {
-        const iframe = document.createElement('iframe');
-        iframe.src = BOTPRESS_URL;
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = '0';
-        iframe.setAttribute('title','Botpress Chat');
-        chatDiv.appendChild(iframe);
-      }
+    function removeOtherChatContent() {
+      Array.from(chatDiv.children).forEach(child => {
+        if (child.id !== 'close-chat') child.remove();
+      });
+    }
+
+    function ensureBotpress() {
+      if (chatDiv.querySelector('iframe')) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = BOTPRESS_URL;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = '0';
+      iframe.setAttribute('title','Botpress Chat');
+      chatDiv.appendChild(iframe);
+    }
+
+    function ensureFlowise() {
+      if (window._flowiseInitialized) return;
+      // Keep Flowise init in a module script so it can import properly
+      const moduleScript = document.createElement('script');
+      moduleScript.type = 'module';
+      moduleScript.text = `
+        import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+        Chatbot.init({
+          chatflowid: "4da69c5a-3b29-4eef-90d1-9790e49a33cd",
+          apiHost: "https://cloud.flowiseai.com",
+          container: "#flowise-chatbot"
+        });
+      `;
+      document.body.appendChild(moduleScript);
+      window._flowiseInitialized = true;
     }
 
     openBtn.addEventListener('click', () => {
-      ensureIframe();
+      const provider = providerSel ? providerSel.value : 'botpress';
+      // Remove any prior provider content (except close button)
+      removeOtherChatContent();
+      if (provider === 'botpress') {
+        ensureBotpress();
+      } else if (provider === 'flowise') {
+        ensureFlowise();
+      }
       chatDiv.classList.add('active');
     });
 
