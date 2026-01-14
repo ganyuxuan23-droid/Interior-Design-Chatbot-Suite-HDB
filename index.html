@@ -265,30 +265,18 @@
       <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="white"/>
     </svg>
   </button>
-  <label for="chat-provider" style="position:fixed;bottom:28px;right:92px;color:#222;font-size:13px;z-index:10000">Bot:</label>
-  <select id="chat-provider" aria-label="Chat provider" title="Choose chat provider" style="position:fixed;bottom:20px;right:70px;z-index:10000;padding:6px;border-radius:6px;border:1px solid #ccc;background:#fff;color:#111;font-size:13px;">
-    <option value="botpress">Botpress</option>
-    <option value="flowise">Flowise</option>
-  </select>
 
   <!-- Chatbot Container -->
   <div id="flowise-chatbot">
     <span id="close-chat">&times;</span>
   </div>
 
-  <!-- Chat provider loader: Botpress iframe or Flowise embed (lazy) -->
+  <!-- Botpress chat iframe loader -->
   <script>
     const BOTPRESS_URL = "https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/14/03/20260114035928-MOB2EQWY.json";
     const chatDiv = document.getElementById("flowise-chatbot");
     const openBtn = document.getElementById("open-chat");
     const closeBtn = document.getElementById("close-chat");
-    const providerSel = document.getElementById('chat-provider');
-
-    function removeOtherChatContent() {
-      Array.from(chatDiv.children).forEach(child => {
-        if (child.id !== 'close-chat') child.remove();
-      });
-    }
 
     function ensureBotpress() {
       if (chatDiv.querySelector('iframe')) return;
@@ -301,16 +289,8 @@
       chatDiv.appendChild(iframe);
     }
 
-
     openBtn.addEventListener('click', () => {
-      const provider = providerSel ? providerSel.value : 'botpress';
-      // Remove any prior provider content (except close button)
-      removeOtherChatContent();
-      if (provider === 'botpress') {
-        ensureBotpress();
-      } else if (provider === 'flowise') {
-        ensureFlowise();
-      }
+      ensureBotpress();
       chatDiv.classList.add('active');
     });
 
