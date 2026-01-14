@@ -153,25 +153,29 @@
       bottom: 80px;
     }
 
-    /* Chat toggle button */
-    #open-chat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 9999;
-    }
+      /* Chat toggle button (compact Flowise style) */
+      #open-chat {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(180deg,#1e90ff,#0b66d0);
+        color: #fff;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 20px rgba(11,102,208,0.25);
+        cursor: pointer;
+        z-index: 9999;
+      }
 
-    #open-chat:hover {
-      background: #45a049;
-    }
+      #open-chat:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(11,102,208,0.28);
+      }
 
     /* Close button inside chatbot */
     #close-chat {
@@ -250,8 +254,12 @@
     </div>
   </div>
 
-  <!-- Chatbot Toggle Button -->
-  <button id="open-chat">Chat with AI</button>
+  <!-- Chatbot Toggle Button (compact Flowise button) -->
+  <button id="open-chat" aria-label="Open chat" title="Chat with us">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="white"/>
+    </svg>
+  </button>
 
   <!-- Chatbot Container -->
   <div id="flowise-chatbot">
