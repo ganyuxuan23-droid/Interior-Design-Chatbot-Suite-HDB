@@ -9,6 +9,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interior Design Chatbot Suite</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     /* ===== General Styles ===== */
     body {
@@ -214,167 +215,65 @@
 </head>
 <body>
 
-  <div class="container">
-    <!-- Page Header -->
-    <h1>Interior Design Chatbot Suite</h1>
-    <p style="text-align:center; max-width:800px; margin:auto;">Your AI assistant for HDB renovation rules, BTO eligibility, grants, budget planning, and interior design inspiration.</p>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">Interior Design Chatbot Suite</a>
+      <ul class="nav-links">
+        <li><button class="nav-btn" data-section="welcome">Home</button></li>
+        <li><button class="nav-btn" data-section="hdb">HDB Info</button></li>
+      </ul>
+    </div>
+  </nav>
 
-    <div class="section">
-      <h2>Explore the Assistant</h2>
-      <div class="media-grid">
-        <div class="media-card poster-card">
-          <h3 style="margin-top:0;">Promotional Poster</h3>
-          <img src="assets/Poster%20-%20Plan%20Your%20Dream%20HDB%20Flat!.png" alt="HDB Chatbot Poster" class="poster">
-          <p style="color:#666; margin-top:10px;">Tap the poster to download or open full size.</p>
+  <!-- Welcome Section -->
+  <section id="welcome" class="section active">
+    <div class="container hero">
+      <h1>Welcome to Interior Design Chatbot Suite</h1>
+      <p>Your AI assistant for HDB renovation rules, budget planning, and design inspiration.</p>
+    </div>
+  </section>
+
+  <!-- HDB Section -->
+  <section id="hdb" class="section">
+    <div class="container">
+      <div class="hero landed-hero">
+        <h1>Smart HDB Renovation Guidance</h1>
+        <p>Accurate renovation advice for HDB flats. Understand rules, estimate budgets, and plan your design with confidence.</p>
+      </div>
+
+      <div class="info-section">
+        <h2>HDB Renovation Info</h2>
+        <p>Get guidance on renovation rules, budget estimations, and interior design ideas tailored for your flat.</p>
+      </div>
+
+      <div class="media-section">
+        <div class="media-item">
+          <video id="promo-video" controls poster="assets/Poster%20-%20Plan%20Your%20Dream%20HDB%20Flat!.png">
+            <source src="assets/HDB%20Renovation%20Assistant.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
-
-        <div class="media-card video-card">
-          <h3 style="margin-top:0;">Watch Our AI Assistant in Action</h3>
-          <div class="video-wrapper">
-            <video id="promo-video" class="video" autoplay muted loop playsinline preload="metadata" poster="assets/Poster%20-%20Plan%20Your%20Dream%20HDB%20Flat!.png">
-              <source src="assets/HDB%20Renovation%20Assistant.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <button id="unmute-btn" class="unmute-btn" aria-pressed="false">Unmute</button>
-          </div>
-
-          <div class="media-controls" role="group" aria-label="Video controls">
-            <div class="control-group">
-              <button id="play-btn" class="control-button" aria-pressed="false">Play</button>
-              <button id="fs-btn" class="control-button">⤢</button>
-            </div>
-
-            <div class="control-group">
-              <input id="progress" class="range" type="range" min="0" max="100" value="0" aria-label="Video progress">
-              <div class="time" id="time">0:00 / 0:00</div>
-            </div>
-
-            <div class="control-group">
-              <label for="volume" style="font-size:13px;color:#444;">Vol</label>
-              <input id="volume" class="range" type="range" min="0" max="1" step="0.01" value="0" aria-label="Volume">
-            </div>
-          </div>
+        <div class="media-item">
+          <img src="assets/Poster%20-%20Plan%20Your%20Dream%20HDB%20Flat!.png" alt="Interior Design Inspiration">
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Botpress official embed will provide its own launcher -->
-
-  <!-- Botpress official embed inserted by hosted scripts above -->
-
-  <!-- No manual iframe loader — relying on Botpress hosted embed scripts included in <head> -->
+  <!-- Botpress embed is loaded from head scripts -->
 
   <script>
-    // Video mute/unmute helper
-    (function(){
-      const video = document.getElementById('promo-video');
-      const btn = document.getElementById('unmute-btn');
-
-      if(!video || !btn) return;
-
-      function updateButton() {
-        if (video.muted) {
-          btn.textContent = 'Unmute';
-          btn.setAttribute('aria-pressed','false');
-        } else {
-          btn.textContent = 'Mute';
-          btn.setAttribute('aria-pressed','true');
-        }
-      }
-
-      // Try to keep autoplay playing muted; show button so user can enable sound.
-      updateButton();
-
-      btn.addEventListener('click', async () => {
-        try {
-          video.muted = !video.muted;
-          updateButton();
-          // Attempt to resume playback with sound on user gesture
-          await video.play();
-        } catch (err) {
-          // If play() fails, leave muted state and focus video for user.
-          console.warn('Playback failed:', err);
-        }
+    // Simple section navigation
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-section');
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        const target = document.getElementById(id);
+        if (target) target.classList.add('active');
+        window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
       });
-
-      // Optional: if user interacts elsewhere, ensure button text reflects state
-      document.addEventListener('visibilitychange', updateButton);
-    })();
-  </script>
-
-  <script>
-    // Custom controls for promo video
-    (function(){
-      const video = document.getElementById('promo-video');
-      const playBtn = document.getElementById('play-btn');
-      const fsBtn = document.getElementById('fs-btn');
-      const progress = document.getElementById('progress');
-      const timeLbl = document.getElementById('time');
-      const volume = document.getElementById('volume');
-
-      if(!video) return;
-
-      // Initialize UI
-      function fmt(t){
-        if(isNaN(t)) return '0:00';
-        const m = Math.floor(t/60);
-        const s = Math.floor(t%60).toString().padStart(2,'0');
-        return `${m}:${s}`;
-      }
-
-      video.addEventListener('loadedmetadata', ()=>{
-        progress.max = Math.floor(video.duration);
-        timeLbl.textContent = `${fmt(0)} / ${fmt(video.duration)}`;
-        // set default volume to 0.8 if initially muted
-        if(video.muted) { volume.value = 0; } else { volume.value = video.volume; }
-      });
-
-      video.addEventListener('timeupdate', ()=>{
-        progress.value = Math.floor(video.currentTime);
-        timeLbl.textContent = `${fmt(video.currentTime)} / ${fmt(video.duration)}`;
-      });
-
-      playBtn.addEventListener('click', async ()=>{
-        if(video.paused){
-          await video.play();
-          playBtn.textContent = 'Pause';
-          playBtn.setAttribute('aria-pressed','true');
-        } else {
-          video.pause();
-          playBtn.textContent = 'Play';
-          playBtn.setAttribute('aria-pressed','false');
-        }
-      });
-
-      progress.addEventListener('input', ()=>{
-        video.currentTime = Number(progress.value);
-      });
-
-      volume.addEventListener('input', ()=>{
-        video.muted = false;
-        video.volume = Number(volume.value);
-        // Sync unmute button state
-        const ub = document.getElementById('unmute-btn'); if(ub) ub.textContent = video.muted? 'Unmute':'Mute';
-      });
-
-      fsBtn.addEventListener('click', ()=>{
-        if (document.fullscreenElement) {
-          document.exitFullscreen();
-        } else {
-          video.requestFullscreen().catch(()=>{});
-        }
-      });
-
-      // Clicking poster image should open file in new tab
-      const posterImg = document.querySelector('.poster-card img.poster');
-      if(posterImg){
-        posterImg.style.cursor = 'pointer';
-        posterImg.addEventListener('click', ()=>{
-          window.open(posterImg.src, '_blank');
-        });
-      }
-    })();
+    });
   </script>
 
 </body>
