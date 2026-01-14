@@ -16,7 +16,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .media-column { flex:1; min-width:260px; }
 .video-card { background:#fff; padding:10px; border-radius:10px; box-shadow:0 6px 18px rgba(12,20,33,0.06); }
 .poster-card { background:#fff; padding:10px; border-radius:10px; box-shadow:0 6px 18px rgba(12,20,33,0.06); display:flex; flex-direction:column; gap:10px; }
-.poster-card img { width:100%; height:220px; object-fit:cover; object-position:center; border-radius:8px; display:block; }
+.poster-card img { width:100%; height:220px; object-fit:contain; object-position:center; background-color:#f3f4f6; border-radius:8px; display:block; }
 .video-card video { width:100%; height:220px; object-fit:cover; border-radius:8px; }
 .widgets { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .widget { background:linear-gradient(180deg,#ffffff,#fbfbfb); padding:8px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.05); font-size:13px; display:flex; flex-direction:column; justify-content:space-between; }
