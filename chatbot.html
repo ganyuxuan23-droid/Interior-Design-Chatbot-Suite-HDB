@@ -3,18 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interior Design Chatbot Suite - Chat</title>
+  <title>HDB Chatbot - Interior Design Suite</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    /* Chat toggle button */
+    #open-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 9999;
+      transition: background 0.2s;
+    }
+    #open-chat:hover {
+      background: #45a049;
+    }
+
+    /* Chatbot container */
+    #flowise-chatbot {
+      position: fixed;
+      bottom: -550px; /* hidden initially */
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      overflow: hidden;
+      background: #fff;
+      transition: bottom 0.3s ease-in-out;
+      z-index: 9998;
+    }
+
+    #flowise-chatbot.active {
+      bottom: 80px; /* visible above the button */
+    }
+
+    /* Close button */
+    #close-chat {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #flowise-chatbot { width: 90%; right: 5%; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Chat with AI</h1>
-  <div id="flowise-chatbot" style="width:400px;height:500px;margin:auto;"></div>
+
+  <h1>Chat with HDB AI Assistant</h1>
+
+  <!-- Chat Toggle Button -->
+  <button id="open-chat">Chat with AI</button>
+
+  <!-- Chatbot Container -->
+  <div id="flowise-chatbot">
+    <span id="close-chat">&times;</span>
+  </div>
+
+  <!-- Flowise Chatbot Script -->
   <script type="module">
     import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
-    Chatbot.init({
-      chatflowid: "4da69c5a-3b29-4eef-90d1-9790e49a33cd",
+
+    // Initialize the chatbot
+    const chatbot = Chatbot.init({
+      chatflowid: "4da69c5a-3b29-4eef-90d1-9790e49a33cd", // your bot's chatflow ID
       apiHost: "https://cloud.flowiseai.com",
       container: "#flowise-chatbot"
     });
+
+    const chatDiv = document.getElementById("flowise-chatbot");
+    const openBtn = document.getElementById("open-chat");
+    const closeBtn = document.getElementById("close-chat");
+
+    // Open chatbot
+    openBtn.addEventListener("click", () => {
+      chatDiv.classList.add("active");
+    });
+
+    // Close chatbot
+    closeBtn.addEventListener("click", () => {
+      chatDiv.classList.remove("active");
+    });
   </script>
+
 </body>
 </html>
