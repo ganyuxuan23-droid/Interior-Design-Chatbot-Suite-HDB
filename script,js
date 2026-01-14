@@ -1,0 +1,25 @@
+// Interior Design Chatbot Suite – HDB Renovation Module
+// This script is for the HDB-specific AI chatbot page
+
+// Log when the page loads
+console.log("Interior Design Chatbot Suite – HDB Renovation AI loaded");
+
+// Example: Basic placeholder for future chatbot interactions
+// Currently, the chatbot is embedded via iframe in index.html
+// You can add more interactive JS later if needed
+
+// Optional: Scroll to chatbot when user clicks a button (example)
+function goToChatbot() {
+  const chatbotSection = document.querySelector('.chatbot');
+  if(chatbotSection) {
+    chatbotSection.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// Optional: Alert user if iframe is not loaded
+window.addEventListener('load', () => {
+  const iframe = document.querySelector('iframe');
+  if (!iframe || !iframe.src) {
+    console.warn("Remember to replace the iframe src with your Flowise HDB chatbot link!");
+  }
+});
