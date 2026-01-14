@@ -16,13 +16,13 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .media-column { flex:1; min-width:260px; }
 .video-card { background:#fff; padding:10px; border-radius:10px; box-shadow:0 6px 18px rgba(12,20,33,0.06); }
 .poster-card { background:#fff; padding:10px; border-radius:10px; box-shadow:0 6px 18px rgba(12,20,33,0.06); display:flex; flex-direction:column; gap:10px; }
-.poster-card img { width:100%; height:260px; object-fit:cover; border-radius:8px; display:block; }
-.video-card video { width:100%; height:260px; object-fit:cover; border-radius:8px; }
+.poster-card img { width:100%; height:220px; object-fit:cover; border-radius:8px; display:block; }
+.video-card video { width:100%; height:220px; object-fit:cover; border-radius:8px; }
 .widgets { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.widget { background:linear-gradient(180deg,#ffffff,#fbfbfb); padding:8px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.05); font-size:13px; }
+.widget { background:linear-gradient(180deg,#ffffff,#fbfbfb); padding:8px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.05); font-size:13px; display:flex; flex-direction:column; justify-content:space-between; }
 .widget .title { font-weight:600; color:#222; margin-bottom:6px; font-size:13px; }
-.widget .desc { color:#555; font-size:12px; }
-.widget .action { margin-top:8px; }
-.widget .btn { padding:8px 10px; font-size:13px; }
+.widget .desc { color:#555; font-size:12px; line-height:1.3; }
+.widget .action { margin-top:10px; }
+.widget .btn { padding:8px 10px; font-size:13px; width:100%; }
 
 @media (max-width:900px){ .media-row{ flex-direction:column; gap:12px; } .widgets{ grid-template-columns:1fr; } }
