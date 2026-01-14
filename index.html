@@ -5,13 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HDB Renovation AI</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Chatbot container styles */
+    #flowise-chatbot {
+      position: fixed;
+      bottom: -550px; /* start hidden below screen */
+      right: 20px;
+      z-index: 9999;
+      width: 350px;
+      height: 500px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      background: #fff;
+      transition: bottom 0.3s ease-in-out; /* slide animation */
+    }
+
+    #flowise-chatbot.active {
+      bottom: 20px; /* slide up to visible */
+    }
+
+    #flowise-chatbot .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      z-index: 10000;
+    }
+  </style>
 </head>
 <body>
+
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container">
       <a href="#" class="logo">HDB Renovation AI</a>
       <ul class="nav-links">
+        <li><button class="nav-btn" data-section="welcome">Home</button></li>
         <li><button class="nav-btn" data-section="hdb">HDB Info</button></li>
       </ul>
     </div>
@@ -21,78 +55,62 @@
   <section id="welcome" class="section active">
     <div class="container hero">
       <h1>Welcome to HDB Renovation AI</h1>
-      <p>Click the "HDB Info" button above to explore professional renovation guidance, pricing, timelines, and design tips.</p>
+      <p>Your one-stop AI assistant for HDB renovation rules, budget planning, and design inspiration.</p>
+      <a href="#hdb" class="btn">Explore HDB Renovation</a>
     </div>
   </section>
 
   <!-- HDB Section -->
   <section id="hdb" class="section">
     <div class="container">
+
       <!-- Hero Banner -->
       <div class="hero hdb-hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
           <h1>Smart HDB Renovation Guidance</h1>
           <p>Accurate renovation advice for HDB flats. Understand rules, estimate budgets, and plan your design with confidence.</p>
-          <a href="#chatbot" class="btn">Chat with AI</a>
+          <button id="open-chat" class="btn">Chat with AI</button>
         </div>
       </div>
 
       <!-- Info Sections -->
       <div class="info-section fade-in">
-        <h2>HDB Renovation Rules</h2>
-        <p>HDB flats have strict renovation rules to ensure safety and compliance. Examples include: <br>
-        • No structural changes to main walls<br>
-        • Soundproofing required for certain modifications<br>
-        • Approval needed for bathroom and kitchen alterations</p>
+        <h2>HDB Renovation Info</h2>
+        <p>Get guidance on renovation rules, budget estimations, and interior ideas.</p>
       </div>
 
-      <div class="info-section fade-in">
-        <h2>Budget & Pricing</h2>
-        <p>Typical renovation costs for HDB flats range from <strong>$15,000 to $50,000</strong> depending on design and scale. Costs include labor, materials, and furniture. Our AI helps you estimate and optimize your budget.</p>
-      </div>
-
-      <div class="info-section fade-in">
-        <h2>Design Tips</h2>
-        <p>Minimalist, functional, and open layouts work best in HDB flats. Use light colors to maximize space perception, choose modular furniture, and consider hidden storage to declutter.</p>
-      </div>
-
-      <div class="info-section fade-in">
-        <h2>Renovation Timeline</h2>
-        <p>A typical HDB renovation takes <strong>6–12 weeks</strong>, depending on complexity. Our AI provides step-by-step guidance from planning to handover.</p>
-      </div>
-
-      <!-- Feature Cards -->
-      <div class="cards">
-        <div class="card fade-in">
-          <img src="https://source.unsplash.com/400x300/?minimalist,interior" alt="Design Ideas">
-          <h3>Modern Designs</h3>
-          <p>Contemporary and practical interior concepts.</p>
-        </div>
-        <div class="card fade-in">
-          <img src="https://source.unsplash.com/400x300/?budget,planning" alt="Budget Planning">
-          <h3>Budget Planner</h3>
-          <p>Estimate costs and optimize your renovation spending.</p>
-        </div>
-        <div class="card fade-in">
-          <img src="https://source.unsplash.com/400x300/?timeline,planning" alt="Timeline">
-          <h3>Timeline Guide</h3>
-          <p>Step-by-step timeline to complete your renovation efficiently.</p>
-        </div>
-      </div>
-
-      <!-- Chatbot Section -->
-      <div id="chatbot" class="chatbot-frame fade-in">
-        <iframe src="https://example.com" title="HDB Chatbot"></iframe>
-      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2026 HDB Renovation AI. All rights reserved.</p>
-  </footer>
+  <!-- Chatbot Container -->
+  <div id="flowise-chatbot">
+    <span class="close-btn" id="close-chat">&times;</span>
+  </div>
 
-  <script src="script.js"></script>
+  <!-- Flowise Chatbot Script -->
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+
+    const chatbot = Chatbot.init({
+      chatflowid: "4da69c5a-3b29-4eef-90d1-9790e49a33cd",
+      apiHost: "https://cloud.flowiseai.com",
+      container: "#flowise-chatbot"
+    });
+
+    // Slide in/out logic
+    const openBtn = document.getElementById("open-chat");
+    const closeBtn = document.getElementById("close-chat");
+    const chatbotContainer = document.getElementById("flowise-chatbot");
+
+    openBtn.addEventListener("click", () => {
+      chatbotContainer.classList.add("active"); // slide in
+    });
+
+    closeBtn.addEventListener("click", () => {
+      chatbotContainer.classList.remove("active"); // slide out
+    });
+  </script>
+
 </body>
 </html>

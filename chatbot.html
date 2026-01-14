@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interior Design Chatbot</title>
+  <style>
+    #chatbox { width: 400px; height: 500px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; }
+    #userInput { width: 300px; }
+    button { padding: 5px 10px; }
+    div { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <h2>Interior Design Chatbot</h2>
+  <div id="chatbox"></div>
+  <input type="text" id="userInput" placeholder="Ask me anything..." />
+  <button onclick="sendMessage()">Send</button>
+
+  <script>
+  async function sendMessage() {
+    const input = document.getElementById('userInput').value;
+    const chatbox = document.getElementById('chatbox');
+
+    chatbox.innerHTML += `<div><b>You:</b> ${input}</div>`;
+
+    // Call Flowise API
+    const response = await fetch('http://localhost:3000/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: input })
+    });
+    const data = await response.json();
+
+    chatbox.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
+    document.getElementById('userInput').value = '';
+    chatbox.scrollTop = chatbox.scrollHeight; // auto-scroll
+  }
+  </script>
+</body>
+</html>
