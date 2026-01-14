@@ -139,7 +139,7 @@
     .unmute-btn:focus { outline: 2px solid #fff; }
 
     /* ===== Chatbot ===== */
-    #flowise-chatbot {
+    #botpress-chatbot {
       position: fixed;
       bottom: -550px;
       right: 20px;
@@ -154,11 +154,11 @@
       z-index: 9998;
     }
 
-    #flowise-chatbot.active {
+    #botpress-chatbot.active {
       bottom: 80px;
     }
 
-      /* Chat toggle button (compact Flowise style) */
+      /* Chat toggle button (compact) */
       #open-chat {
         position: fixed;
         bottom: 20px;
@@ -205,7 +205,7 @@
 
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
-      #flowise-chatbot {
+      #botpress-chatbot {
         width: 90%;
         right: 5%;
       }
@@ -267,14 +267,14 @@
   </button>
 
   <!-- Chatbot Container -->
-  <div id="flowise-chatbot">
+  <div id="botpress-chatbot">
     <span id="close-chat">&times;</span>
   </div>
 
   <!-- Botpress chat iframe loader -->
   <script>
     const BOTPRESS_URL = "https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/14/03/20260114035928-MOB2EQWY.json";
-    const chatDiv = document.getElementById("flowise-chatbot");
+    const chatDiv = document.getElementById("botpress-chatbot");
     const openBtn = document.getElementById("open-chat");
     const closeBtn = document.getElementById("close-chat");
 

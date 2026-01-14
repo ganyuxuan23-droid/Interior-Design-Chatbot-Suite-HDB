@@ -39,7 +39,7 @@
     }
 
     /* Chatbot container */
-    #flowise-chatbot {
+    #botpress-chatbot {
       position: fixed;
       bottom: -550px; /* hidden initially */
       right: 20px;
@@ -54,7 +54,7 @@
       z-index: 9998;
     }
 
-    #flowise-chatbot.active {
+    #botpress-chatbot.active {
       bottom: 80px; /* visible above the button */
     }
 
@@ -72,7 +72,7 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      #flowise-chatbot { width: 90%; right: 5%; }
+      #botpress-chatbot { width: 90%; right: 5%; }
     }
   </style>
 </head>
@@ -84,14 +84,14 @@
   <button id="open-chat">Chat with AI</button>
 
   <!-- Chatbot Container -->
-  <div id="flowise-chatbot">
+  <div id="botpress-chatbot">
     <span id="close-chat">&times;</span>
   </div>
 
   <!-- Botpress Chatbot Embed -->
   <script>
     const BOTPRESS_URL = "https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/14/03/20260114035928-MOB2EQWY.json";
-    const chatDiv = document.getElementById("flowise-chatbot");
+    const chatDiv = document.getElementById("botpress-chatbot");
     const openBtn = document.getElementById("open-chat");
     const closeBtn = document.getElementById("close-chat");
 
