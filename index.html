@@ -1,103 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Interior Design Chatbot Suite – HDB Renovation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HDB Renovation AI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="site-header">
-    <h1>Interior Design Chatbot Suite</h1>
-    <p>HDB Renovation AI Assistant</p>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-
-    <!-- Introduction -->
-    <section class="card">
-      <h2>Overview</h2>
-      <p>
-        The HDB Renovation AI Assistant is part of the Interior Design Chatbot Suite.
-        It provides fast, accurate, and regulation-compliant renovation guidance
-        for HDB homeowners in Singapore.
-      </p>
-      <p>
-        By leveraging Generative AI, the chatbot reduces confusion, delays,
-        and uncertainty during renovation planning, allowing users to make
-        informed decisions before engaging an interior designer.
-      </p>
-    </section>
-
-    <!-- Problem -->
-    <section class="card muted">
-      <h2>Problem Addressed</h2>
-      <p>
-        Traditional interior design consultations are time-consuming and often
-        require physical meetings. Many HDB homeowners are unsure about renovation
-        rules, realistic budgets, renovation timelines, and suitable design concepts.
-      </p>
-      <p>
-        This results in delays, miscommunication, and poor renovation decisions.
-        The HDB Renovation AI Assistant addresses these challenges by providing
-        instant, property-specific guidance.
-      </p>
-    </section>
-
-    <!-- Capabilities -->
-    <section class="card">
-      <h2>What the AI Can Help With</h2>
-      <ul class="features">
-        <li>HDB renovation rules and permit requirements</li>
-        <li>Common do’s and don’ts for HDB flats</li>
-        <li>Realistic renovation budget ranges</li>
-        <li>Typical renovation timelines and workflows</li>
-        <li>Design ideas suitable for HDB layouts</li>
-        <li>Pre-qualification before meeting an interior designer</li>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">HDB Renovation AI</a>
+      <ul class="nav-links">
+        <li><button class="nav-btn" data-section="hdb">HDB Info</button></li>
       </ul>
-    </section>
+    </div>
+  </nav>
 
-    <!-- AI Explanation -->
-    <section class="card muted">
-      <h2>AI & Technology Used</h2>
-      <p>
-        This chatbot is powered by a Large Language Model (LLM) integrated using
-        a chatbot flow platform. Retrieval Augmented Generation (RAG) is applied
-        to ground responses in HDB renovation guidelines, space planning principles,
-        and realistic cost ranges.
-      </p>
-      <p>
-        The AI is designed to support users ethically by providing transparent,
-        fact-based information and does not replace certified interior designers.
-      </p>
-    </section>
+  <!-- Welcome Section -->
+  <section id="welcome" class="section active">
+    <div class="container hero">
+      <h1>Welcome to HDB Renovation AI</h1>
+      <p>Click the "HDB Info" button above to explore professional renovation guidance, pricing, timelines, and design tips.</p>
+    </div>
+  </section>
 
-    <!-- Chatbot -->
-    <section class="card">
-      <h2>HDB Renovation AI Chatbot</h2>
-      <p class="subtext">
-        Ask questions about HDB renovation rules, budgets, timelines, and design ideas.
-      </p>
+  <!-- HDB Section -->
+  <section id="hdb" class="section">
+    <div class="container">
+      <!-- Hero Banner -->
+      <div class="hero hdb-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+          <h1>Smart HDB Renovation Guidance</h1>
+          <p>Accurate renovation advice for HDB flats. Understand rules, estimate budgets, and plan your design with confidence.</p>
+          <a href="#chatbot" class="btn">Chat with AI</a>
+        </div>
+      </div>
 
-      <!-- Replace this link with your Flowise chatbot -->
-      <iframe
-        src="https://YOUR-HDB-FLOWISE-LINK-HERE"
-        title="HDB Renovation AI Chatbot"
-        loading="lazy">
-      </iframe>
-    </section>
+      <!-- Info Sections -->
+      <div class="info-section fade-in">
+        <h2>HDB Renovation Rules</h2>
+        <p>HDB flats have strict renovation rules to ensure safety and compliance. Examples include: <br>
+        • No structural changes to main walls<br>
+        • Soundproofing required for certain modifications<br>
+        • Approval needed for bathroom and kitchen alterations</p>
+      </div>
 
-  </main>
+      <div class="info-section fade-in">
+        <h2>Budget & Pricing</h2>
+        <p>Typical renovation costs for HDB flats range from <strong>$15,000 to $50,000</strong> depending on design and scale. Costs include labor, materials, and furniture. Our AI helps you estimate and optimize your budget.</p>
+      </div>
+
+      <div class="info-section fade-in">
+        <h2>Design Tips</h2>
+        <p>Minimalist, functional, and open layouts work best in HDB flats. Use light colors to maximize space perception, choose modular furniture, and consider hidden storage to declutter.</p>
+      </div>
+
+      <div class="info-section fade-in">
+        <h2>Renovation Timeline</h2>
+        <p>A typical HDB renovation takes <strong>6–12 weeks</strong>, depending on complexity. Our AI provides step-by-step guidance from planning to handover.</p>
+      </div>
+
+      <!-- Feature Cards -->
+      <div class="cards">
+        <div class="card fade-in">
+          <img src="https://source.unsplash.com/400x300/?minimalist,interior" alt="Design Ideas">
+          <h3>Modern Designs</h3>
+          <p>Contemporary and practical interior concepts.</p>
+        </div>
+        <div class="card fade-in">
+          <img src="https://source.unsplash.com/400x300/?budget,planning" alt="Budget Planning">
+          <h3>Budget Planner</h3>
+          <p>Estimate costs and optimize your renovation spending.</p>
+        </div>
+        <div class="card fade-in">
+          <img src="https://source.unsplash.com/400x300/?timeline,planning" alt="Timeline">
+          <h3>Timeline Guide</h3>
+          <p>Step-by-step timeline to complete your renovation efficiently.</p>
+        </div>
+      </div>
+
+      <!-- Chatbot Section -->
+      <div id="chatbot" class="chatbot-frame fade-in">
+        <iframe src="https://example.com" title="HDB Chatbot"></iframe>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <p><strong>Course:</strong> C240 AI Essentials & Innovations</p>
-    <p><strong>Project:</strong> Interior Design Chatbot Suite</p>
-    <p><strong>Module:</strong> HDB Renovation AI Assistant</p>
-    <p><strong>Developed by:</strong> Gan Yu Xuan</p>
+  <footer class="footer">
+    <p>&copy; 2026 HDB Renovation AI. All rights reserved.</p>
   </footer>
 
   <script src="script.js"></script>
