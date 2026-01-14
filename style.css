@@ -16,8 +16,11 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .media-column { flex:1; min-width:260px; }
 .video-card { background:transparent; padding:0; border-radius:8px; box-shadow:none; height:400px; overflow:hidden; }
 .poster-card { background:transparent; padding:0; border-radius:8px; box-shadow:none; height:400px; overflow:hidden; display:block; }
+.video-card, .poster-card { background:transparent; padding:0; border-radius:8px; box-shadow:none; width:100%; aspect-ratio: 16/9; display:block; }
 .poster-card img { width:100%; height:100%; object-fit:contain; object-position:center; display:block; }
 .video-card video { width:100%; height:100%; object-fit:contain; display:block; }
+.poster-card img { width:100%; height:100%; object-fit:contain; object-position:center; display:block; border-radius:8px; }
+.video-card video { width:100%; height:100%; object-fit:contain; display:block; border-radius:8px; }
 
 /* HDB info left-aligned (override global h1/h2 centering) */
 .info-section { text-align: left; max-width: 900px; margin: 0 auto 24px; }
@@ -26,7 +29,12 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 @media (max-width:900px){
 	.media-row{ flex-direction:column; gap:12px; }
 	.widgets{ grid-template-columns:1fr; }
-	.video-card, .poster-card { height: auto; }
+	.video-card, .poster-card { aspect-ratio: auto; height: auto; }
+}
+@media (max-width:900px){
+  .media-row{ flex-direction:column; gap:12px; }
+  .widgets{ grid-template-columns:1fr; }
+  .video-card, .poster-card { aspect-ratio: auto; height: auto; }
 }
 .widgets { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .widget { background:linear-gradient(180deg,#ffffff,#fbfbfb); padding:8px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.05); font-size:13px; display:flex; flex-direction:column; justify-content:space-between; }
