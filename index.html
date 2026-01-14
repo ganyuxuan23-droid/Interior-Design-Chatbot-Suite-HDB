@@ -259,45 +259,11 @@
     </div>
   </div>
 
-  <!-- Chatbot Toggle Button (compact) -->
-  <button id="open-chat" aria-label="Open chat" title="Chat with us">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="white"/>
-    </svg>
-  </button>
+  <!-- Botpress official embed will provide its own launcher -->
 
-  <!-- Chatbot Container -->
-  <div id="botpress-chatbot">
-    <span id="close-chat">&times;</span>
-  </div>
+  <!-- Botpress official embed inserted by hosted scripts above -->
 
-  <!-- Botpress chat iframe loader -->
-  <script>
-    const BOTPRESS_URL = "https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/14/03/20260114035928-MOB2EQWY.json";
-    const chatDiv = document.getElementById("botpress-chatbot");
-    const openBtn = document.getElementById("open-chat");
-    const closeBtn = document.getElementById("close-chat");
-
-    function ensureBotpress() {
-      if (chatDiv.querySelector('iframe')) return;
-      const iframe = document.createElement('iframe');
-      iframe.src = BOTPRESS_URL;
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-      iframe.style.border = '0';
-      iframe.setAttribute('title','Botpress Chat');
-      chatDiv.appendChild(iframe);
-    }
-
-    openBtn.addEventListener('click', () => {
-      ensureBotpress();
-      chatDiv.classList.add('active');
-    });
-
-    closeBtn.addEventListener('click', () => {
-      chatDiv.classList.remove('active');
-    });
-  </script>
+  <!-- No manual iframe loader — relying on Botpress hosted embed scripts included in <head> -->
 
   <script>
     // Video mute/unmute helper
