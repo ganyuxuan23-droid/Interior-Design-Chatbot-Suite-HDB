@@ -3,39 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HDB Renovation AI</title>
+  <title>Interior Design Chatbot Suite</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Chatbot container styles */
-    #flowise-chatbot {
-      position: fixed;
-      bottom: -550px; /* start hidden below screen */
-      right: 20px;
-      z-index: 9999;
-      width: 350px;
-      height: 500px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      background: #fff;
-      transition: bottom 0.3s ease-in-out; /* slide animation */
-    }
-
-    #flowise-chatbot.active {
-      bottom: 20px; /* slide up to visible */
-    }
-
-    #flowise-chatbot .close-btn {
-      position: absolute;
-      top: 5px;
-      right: 10px;
-      font-size: 18px;
-      font-weight: bold;
+    /* ===== General Styles ===== */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
       color: #333;
-      cursor: pointer;
-      z-index: 10000;
+      scroll-behavior: smooth; /* smooth scrolling */
     }
+
+    a, button { text-decoration: none; cursor: pointer; font-family: inherit; }
+
+    /* ===== Navbar ===== */
+    .navbar { width: 100%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+    .navbar .container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+    .logo { font-weight: bold; font-size: 1.3rem; color: #333; }
+    .nav-links { list-style: none; display: flex; gap: 15px; }
+    .nav-links .nav-btn { background: none; border: none; font-size: 1rem; padding: 6px 12px; border-radius: 4px; transition: 0.2s; }
+    .nav-links .nav-btn:hover { background: #e0e0e0; }
+
+    /* ===== Hero Section ===== */
+    .hero { padding: 80px 20px; text-align: center; }
+    .hdb-hero { background: #fff; border-radius: 12px; padding: 40px 20px; margin-bottom: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 900px; margin-left:auto; margin-right:auto; }
+    .hdb-hero h1 { font-size: 2rem; margin-bottom: 20px; color: #222; }
+    .hdb-hero p { font-size: 1rem; line-height: 1.6; color: #444; margin-bottom: 20px; }
+    .btn { background: #4CAF50; color: white; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 5px; transition: 0.2s; }
+    .btn:hover { background: #45a049; }
+
+    /* ===== Info Section ===== */
+    .info-section { max-width: 900px; margin: 0 auto 60px auto; padding: 0 20px; text-align: center; }
+    .info-section h2 { font-size: 1.6rem; margin-bottom: 15px; color: #222; }
+    .info-section p { font-size: 1rem; line-height: 1.6; color: #555; }
+
+    /* ===== Chatbot ===== */
+    #flowise-chatbot { position: fixed; bottom: -550px; right: 20px; z-index: 9999; width: 350px; height: 500px; border: 1px solid #ccc; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); background: #fff; transition: bottom 0.3s ease-in-out; }
+    #flowise-chatbot.active { bottom: 20px; }
+    #flowise-chatbot .close-btn { position: absolute; top: 5px; right: 10px; font-size: 18px; font-weight: bold; color: #333; cursor: pointer; z-index: 10000; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) { .hdb-hero { padding: 30px 15px; } #flowise-chatbot { width: 90%; right: 5%; } }
   </style>
 </head>
 <body>
@@ -43,7 +53,7 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container">
-      <a href="#" class="logo">HDB Renovation AI</a>
+      <a href="#" class="logo">Interior Design Chatbot Suite</a>
       <ul class="nav-links">
         <li><button class="nav-btn" data-section="welcome">Home</button></li>
         <li><button class="nav-btn" data-section="hdb">HDB Info</button></li>
@@ -54,36 +64,28 @@
   <!-- Welcome Section -->
   <section id="welcome" class="section active">
     <div class="container hero">
-      <h1>Welcome to HDB Renovation AI</h1>
-      <p>Your one-stop AI assistant for HDB renovation rules, budget planning, and design inspiration.</p>
-      <a href="#hdb" class="btn">Explore HDB Renovation</a>
+      <h1>Welcome to Interior Design Chatbot Suite</h1>
+      <p>Your AI assistant for HDB renovation rules, budget planning, and design inspiration.</p>
     </div>
   </section>
 
   <!-- HDB Section -->
   <section id="hdb" class="section">
     <div class="container">
-
-      <!-- Hero Banner -->
       <div class="hero hdb-hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-          <h1>Smart HDB Renovation Guidance</h1>
-          <p>Accurate renovation advice for HDB flats. Understand rules, estimate budgets, and plan your design with confidence.</p>
-          <button id="open-chat" class="btn">Chat with AI</button>
-        </div>
+        <h1>Smart HDB Renovation Guidance</h1>
+        <p>Accurate renovation advice for HDB flats. Understand rules, estimate budgets, and plan your design with confidence.</p>
+        <button id="open-chat" class="btn">Chat with AI</button>
       </div>
 
-      <!-- Info Sections -->
-      <div class="info-section fade-in">
+      <div class="info-section">
         <h2>HDB Renovation Info</h2>
-        <p>Get guidance on renovation rules, budget estimations, and interior ideas.</p>
+        <p>Get guidance on renovation rules, budget estimations, and interior design ideas tailored for your flat.</p>
       </div>
-
     </div>
   </section>
 
-  <!-- Chatbot Container -->
+  <!-- Chatbot -->
   <div id="flowise-chatbot">
     <span class="close-btn" id="close-chat">&times;</span>
   </div>
@@ -98,17 +100,21 @@
       container: "#flowise-chatbot"
     });
 
-    // Slide in/out logic
+    // Open / Close chatbot
     const openBtn = document.getElementById("open-chat");
     const closeBtn = document.getElementById("close-chat");
     const chatbotContainer = document.getElementById("flowise-chatbot");
 
-    openBtn.addEventListener("click", () => {
-      chatbotContainer.classList.add("active"); // slide in
-    });
+    openBtn.addEventListener("click", () => { chatbotContainer.classList.add("active"); });
+    closeBtn.addEventListener("click", () => { chatbotContainer.classList.remove("active"); });
 
-    closeBtn.addEventListener("click", () => {
-      chatbotContainer.classList.remove("active"); // slide out
+    // Smooth scroll for navbar
+    const navButtons = document.querySelectorAll(".nav-btn");
+    navButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const section = document.getElementById(btn.dataset.section);
+        section.scrollIntoView({ behavior: 'smooth' });
+      });
     });
   </script>
 
