@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/01/14/03/20260114035928-3GIYVJDE.js" defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HDB Chatbot - Interior Design Suite</title>
@@ -80,41 +82,7 @@
 
   <h1>Chat with HDB AI Assistant</h1>
 
-  <!-- Chat Toggle Button -->
-  <button id="open-chat">Chat with AI</button>
-
-  <!-- Chatbot Container -->
-  <div id="botpress-chatbot">
-    <span id="close-chat">&times;</span>
-  </div>
-
-  <!-- Botpress Chatbot Embed -->
-  <script>
-    const BOTPRESS_URL = "https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/14/03/20260114035928-MOB2EQWY.json";
-    const chatDiv = document.getElementById("botpress-chatbot");
-    const openBtn = document.getElementById("open-chat");
-    const closeBtn = document.getElementById("close-chat");
-
-    function ensureBotpress() {
-      if (chatDiv.querySelector('iframe')) return;
-      const iframe = document.createElement('iframe');
-      iframe.src = BOTPRESS_URL;
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-      iframe.style.border = '0';
-      iframe.setAttribute('title','Botpress Chat');
-      chatDiv.appendChild(iframe);
-    }
-
-    openBtn.addEventListener('click', () => {
-      ensureBotpress();
-      chatDiv.classList.add('active');
-    });
-
-    closeBtn.addEventListener('click', () => {
-      chatDiv.classList.remove('active');
-    });
-  </script>
+  <!-- Rely on Botpress hosted embed scripts above; they provide the single launcher. -->
 
 </body>
 </html>
