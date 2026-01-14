@@ -88,29 +88,31 @@
     <span id="close-chat">&times;</span>
   </div>
 
-  <!-- Flowise Chatbot Script -->
-  <script type="module">
-    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
-
-    // Initialize the chatbot
-    const chatbot = Chatbot.init({
-      chatflowid: "4da69c5a-3b29-4eef-90d1-9790e49a33cd", // your bot's chatflow ID
-      apiHost: "https://cloud.flowiseai.com",
-      container: "#flowise-chatbot"
-    });
-
+  <!-- Botpress Chatbot Embed -->
+  <script>
+    const BOTPRESS_URL = "https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/14/03/20260114035928-MOB2EQWY.json";
     const chatDiv = document.getElementById("flowise-chatbot");
     const openBtn = document.getElementById("open-chat");
     const closeBtn = document.getElementById("close-chat");
 
-    // Open chatbot
-    openBtn.addEventListener("click", () => {
-      chatDiv.classList.add("active");
+    function ensureBotpress() {
+      if (chatDiv.querySelector('iframe')) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = BOTPRESS_URL;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = '0';
+      iframe.setAttribute('title','Botpress Chat');
+      chatDiv.appendChild(iframe);
+    }
+
+    openBtn.addEventListener('click', () => {
+      ensureBotpress();
+      chatDiv.classList.add('active');
     });
 
-    // Close chatbot
-    closeBtn.addEventListener("click", () => {
-      chatDiv.classList.remove("active");
+    closeBtn.addEventListener('click', () => {
+      chatDiv.classList.remove('active');
     });
   </script>
 
