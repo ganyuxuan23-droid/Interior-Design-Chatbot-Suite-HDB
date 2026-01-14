@@ -301,22 +301,6 @@
       chatDiv.appendChild(iframe);
     }
 
-    function ensureFlowise() {
-      if (window._flowiseInitialized) return;
-      // Keep Flowise init in a module script so it can import properly
-      const moduleScript = document.createElement('script');
-      moduleScript.type = 'module';
-      moduleScript.text = `
-        import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
-        Chatbot.init({
-          chatflowid: "4da69c5a-3b29-4eef-90d1-9790e49a33cd",
-          apiHost: "https://cloud.flowiseai.com",
-          container: "#flowise-chatbot"
-        });
-      `;
-      document.body.appendChild(moduleScript);
-      window._flowiseInitialized = true;
-    }
 
     openBtn.addEventListener('click', () => {
       const provider = providerSel ? providerSel.value : 'botpress';
